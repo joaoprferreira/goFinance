@@ -1,6 +1,6 @@
 import React from "react";
 import { HighlightCard } from "../../components/HighlightCard";
-import { TransactionCard } from "../../components/TransactionCard";
+import { TransactionCard, TransactionCardProps } from "../../components/TransactionCard";
 import {
   Container,
   Header,
@@ -13,10 +13,55 @@ import {
   Icon,
   HighlightCards,
   Transactions,
-  Title
+  Title,
+  TransactionList,
 } from './styles'
 
+export interface DataListProps extends TransactionCardProps {
+  id: string,
+}
+
 export function Dashboard() {
+
+  const MockTransactionList: DataListProps = [
+    {
+    id: '1',
+    type: 'positive',
+    Title: "Desenvolvimento de site",
+    Amount: "R$ 12.000,00",
+    Category: {
+      name: "Vendas",
+      icon: 'dollar-sign'
+    },
+    date: "13/04/2020",
+},
+{
+  id: '2',
+  type: 'negative',
+  Title: "Hamburgueria Pizzy",
+  Amount: "R$ 59,00",
+  Category: {
+    name: "Alimentação",
+    icon: 'coffee'
+  },
+  date: "10/04/2020",
+},   
+{
+  id: '3',
+  type: 'negative',
+  Title: "Aluguel do apartamento",
+  Amount: "R$ 1.200,00",
+  Category: {
+    name: "Casa",
+    icon: 'shopping-bag'
+  },
+  date: "27/03/2020",
+},
+
+]
+
+const TestingData = MockTransactionList
+console.log("Testing Data ::", TestingData)
 
   return (
     <Container>
@@ -40,7 +85,7 @@ export function Dashboard() {
         type="up" 
         title="Entradas" 
         amount='R$ 17.400,00' 
-        lastTransaction="Última entrada dia 13 de abril" 
+        lastTransaction="Última entrada dia 07 de março" 
       />
       <HighlightCard 
         type='down'
@@ -60,7 +105,12 @@ export function Dashboard() {
       <Transactions>
         <Title>Listagem</Title>
 
-        <TransactionCard />
+        <TransactionList
+          data={MockTransactionList}
+          keyExtractor={item => item.id}
+          renderItem={({item}) => <TransactionCard data={item}/>}
+        />
+
       </Transactions>
 
     </Container>
