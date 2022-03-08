@@ -1,20 +1,40 @@
 import React from "react";
 import * as S from './style'
 
-export function TransactionCard(){
+interface category {
+  name: string, 
+  icon: string,
+}
+
+export interface TransactionCardProps {
+  type: 'positive' | 'negative';
+  Title: string;
+  Amount: string;
+  Category: category;
+  date: string;
+}
+
+interface Props {
+  data: TransactionCardProps;
+}
+
+export function TransactionCard({data}: Props){
   return(
   <S.Container>
-    <S.Title> Desenvolvimento de site</S.Title>
+    <S.Title>{data.Title}</S.Title>
 
-    <S.Amount> R$ 12.000,00</S.Amount>
+    <S.Amount type={data.type}>
+      {data.type === 'negative' && '- '}
+      {data.Amount}
+      </S.Amount>
 
     <S.Footer>
       <S.Category>
-        <S.Icon name='dollar-sign'/>
-        <S.CategoryName>Vendas</S.CategoryName>
+        <S.Icon name={data.Category.icon}/>
+        <S.CategoryName>{data.Category.name}</S.CategoryName>
       </S.Category>
 
-      <S.Date>13/04/2020</S.Date>
+      <S.Date>{data.date}</S.Date>
     </S.Footer>
 
   </S.Container>
