@@ -23,7 +23,7 @@ export interface DataListProps extends TransactionCardProps {
 
 export function Dashboard() {
 
-  const MockTransactionList: DataListProps = [
+  const data: DataListProps[] = [
     {
     id: '1',
     type: 'positive',
@@ -59,9 +59,6 @@ export function Dashboard() {
 },
 
 ]
-
-const TestingData = MockTransactionList
-console.log("Testing Data ::", TestingData)
 
   return (
     <Container>
@@ -106,7 +103,7 @@ console.log("Testing Data ::", TestingData)
         <Title>Listagem</Title>
 
         <TransactionList
-          data={MockTransactionList}
+          data={data}
           keyExtractor={item => item.id}
           renderItem={({item}) => <TransactionCard data={item}/>}
         />
